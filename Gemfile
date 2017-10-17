@@ -52,6 +52,3 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
-
-# Added at 2017-10-16 21:08:29 -0400 by michael:
-gem "discourse_sso", "~> 0.0.2"

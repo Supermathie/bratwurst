@@ -1,4 +1,5 @@
-class TestSSO < DiscourseSSO::SingleSignOn
+require 'single_sign_on'
+class TestSSO < SingleSignOn
 
   def sso_url
     ENV['SSO_URL'] or "/sso"
