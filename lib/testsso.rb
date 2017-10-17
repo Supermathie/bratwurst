@@ -9,10 +9,6 @@ class TestSSO < SingleSignOn
     ENV['SSO_SECRET'] or 'thisisabadideatouseoutsideofssotesting'
   end
 
-  def return_url
-    ENV['SSO_RETURN_URL'] or '/sso_login'
-  end
-
   def self.generate_sso
     sso = new
     sso.nonce = SecureRandom.hex

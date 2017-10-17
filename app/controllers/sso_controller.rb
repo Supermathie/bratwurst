@@ -18,6 +18,8 @@ class SsoController < ActionController::Base
     sso.name        = request[:user][:name]
     sso.username    = request[:user][:username]
     sso.external_id = request[:user][:external_id]
-    redirect_to sso.to_url(sso.return_url)
+    puts sso.diagnostics
+    return_url = sso.return_sso_url.nil? ? '/sso_login' : sso.return_sso_url
+    redirect_to sso.to_url(return_url)
   end
 end
