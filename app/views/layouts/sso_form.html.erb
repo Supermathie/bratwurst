@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Bratwurst SSO Tester</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <%= form_tag do %>
+      <%= hidden_field_tag(:payload, payload) %>
+
+      <%= label(:user, :name) %>
+      <%= text_field(:user, :name) %><br/>
+
+      <%= label(:user, :username) %>
+      <%= text_field(:user, :username) %><br/>
+
+      <%= label(:user, :email) %>
+      <%= email_field(:user, :email) %><br/>
+
+      <%= label(:user, :external_id, 'External ID') %>
+      <%= number_field(:user, :external_id) %><br/>
+
+      <%= submit_tag "Login" %>
+    <% end %>
+  </body>
+</html>

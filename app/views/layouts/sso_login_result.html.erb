@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Bratwurst SSO Login Result</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <h1>Login Result</h1>
+    <p>Name: <%= sso.name %></p>
+    <p>Username: <%= sso.username %></p>
+    <p>Email: <%= sso.email %></p>
+    <p>External ID: <%= sso.external_id %></p>
+  </body>
+</html>
