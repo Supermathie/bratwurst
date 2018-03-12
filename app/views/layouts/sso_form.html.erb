@@ -22,7 +22,18 @@
       <%= email_field(:user, :email) %><br/>
 
       <%= label(:user, :external_id, 'External ID') %>
-      <%= number_field(:user, :external_id) %><br/>
+      <%= text_field(:user, :external_id) %><br/>
+
+      <hr/>
+
+      <%= label(:user, :admin, 'Admin?') %>
+      <%= check_box(:user, :admin) %><br/>
+
+      <%= label(:user, :add_groups, 'Add Groups') %>
+      <%= text_field(:user, :add_groups) %><br/>
+
+      <%= label(:user, :remove_groups, 'Remove Groups') %>
+      <%= text_field(:user, :remove_groups) %><br/>
 
       <%= submit_tag "Login" %>
     <% end %>

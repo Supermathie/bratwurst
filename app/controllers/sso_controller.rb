@@ -18,6 +18,10 @@ class SsoController < ActionController::Base
     sso.name        = request[:user][:name]
     sso.username    = request[:user][:username]
     sso.external_id = request[:user][:external_id]
+
+    sso.admin         = request[:user][:admin] == '1'
+    sso.add_groups    = request[:user][:add_groups].split(' ')
+    sso.remove_groups = request[:user][:remove_groups].split(' ')
     puts sso.diagnostics
     return_url = sso.return_sso_url.nil? ? '/sso_login' : sso.return_sso_url
     redirect_to sso.to_url(return_url)
