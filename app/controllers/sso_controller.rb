@@ -20,6 +20,7 @@ class SsoController < ActionController::Base
     sso.external_id = request[:user][:external_id]
 
     sso.admin         = request[:user][:admin] == '1'
+    sso.moderator     = request[:user][:moderator] == '1'
     sso.add_groups    = request[:user][:add_groups].split(' ')
     sso.remove_groups = request[:user][:remove_groups].split(' ')
     puts sso.diagnostics
