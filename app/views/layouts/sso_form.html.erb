@@ -23,7 +23,13 @@
 
       <%= label(:user, :external_id, 'External ID') %>
       <%= text_field(:user, :external_id) %><br/>
+    
+      <%= label(:user, :avatar_url, 'Avatar URL') %>
+      <%= text_field(:user, :avatar_url) %><br/>
 
+      <%= label(:user, :avatar_force_update, 'Force avatar update') %>
+      <%= check_box(:user, :avatar_force_update) %><br/>
+    
       <hr/>
 
       <%= label(:user, :admin, 'Admin?') %>
@@ -37,6 +43,12 @@
 
       <%= label(:user, :remove_groups, 'Remove Groups') %>
       <%= text_field(:user, :remove_groups) %><br/>
+    
+      <%= label(:user, :require_activation, 'Require activation?') %>
+      <%= check_box(:user, :require_activation) %><br/>
+    
+      <%= label(:user, :suppress_welcome_message, 'Suppress welcome message?') %>
+      <%= check_box(:user, :suppress_welcome_message) %><br/>
 
       <%= submit_tag "Login" %>
     <% end %>
