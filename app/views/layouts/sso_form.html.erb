@@ -23,32 +23,49 @@
 
       <%= label(:user, :external_id, 'External ID') %>
       <%= text_field(:user, :external_id) %><br/>
-    
+
+      <br/>
+
+      <%= label(:user, :require_2fa, 'Require 2FA?') %>
+      <%= check_box(:user, :require_2fa) %><br/>
+
+      <%= label(:user, :confirmed_2fa, 'Confirmed 2FA?') %>
+      <%= check_box(:user, :confirmed_2fa) %><br/>
+
+      <br/>
+
       <%= label(:user, :avatar_url, 'Avatar URL') %>
       <%= text_field(:user, :avatar_url) %><br/>
 
       <%= label(:user, :avatar_force_update, 'Force avatar update') %>
       <%= check_box(:user, :avatar_force_update) %><br/>
-    
-      <hr/>
 
-      <%= label(:user, :admin, 'Admin?') %>
-      <%= check_box(:user, :admin) %><br/>
-      
-      <%= label(:user, :moderator, 'Moderator?') %>
-      <%= check_box(:user, :moderator) %><br/>
-    
+      <br/>
+
       <%= label(:user, :add_groups, 'Add Groups') %>
       <%= text_field(:user, :add_groups) %><br/>
 
       <%= label(:user, :remove_groups, 'Remove Groups') %>
       <%= text_field(:user, :remove_groups) %><br/>
     
+      <%= label(:user, :groups, 'Specify Groups') %>
+      <%= text_field(:user, :groups) %><br/>
+
+      <br/>
+
+      <%= label(:user, :admin, 'Admin?') %>
+      <%= check_box(:user, :admin) %><br/>
+      
+      <%= label(:user, :moderator, 'Moderator?') %>
+      <%= check_box(:user, :moderator) %><br/>
+
       <%= label(:user, :require_activation, 'Require activation?') %>
       <%= check_box(:user, :require_activation) %><br/>
     
       <%= label(:user, :suppress_welcome_message, 'Suppress welcome message?') %>
       <%= check_box(:user, :suppress_welcome_message) %><br/>
+
+      <hr/>
 
       <%= submit_tag "Login" %>
     <% end %>
