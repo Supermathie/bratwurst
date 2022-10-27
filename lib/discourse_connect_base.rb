@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class SingleSignOn
+class DiscourseConnectBase
 
   class ParseError < RuntimeError; end
 
@@ -11,15 +11,20 @@ class SingleSignOn
     avatar_url
     bio
     card_background_url
+    confirmed_2fa
     email
     external_id
     groups
     locale
     locale_force_update
+    location
+    logout
     name
+    no_2fa_methods
     nonce
     profile_background_url
     remove_groups
+    require_2fa
     require_activation
     return_sso_url
     suppress_welcome_message
@@ -33,8 +38,12 @@ class SingleSignOn
   BOOLS = %i{
     admin
     avatar_force_update
+    confirmed_2fa
     locale_force_update
+    logout
     moderator
+    no_2fa_methods
+    require_2fa
     require_activation
     suppress_welcome_message
   }
@@ -45,6 +54,10 @@ class SingleSignOn
 
   def self.nonce_expiry_time=(v)
     @nonce_expiry_time = v
+  end
+
+  def self.used_nonce_expiry_time
+    24.hours
   end
 
   attr_accessor(*ACCESSORS)
@@ -58,8 +71,8 @@ class SingleSignOn
     raise RuntimeError, "sso_url not implemented on class, be sure to set it on instance"
   end
 
-  def self.parse(payload, sso_secret = nil)
-    sso = new
+  def self.parse(payload, sso_secret = nil, **init_kwargs)
+    sso = new(**init_kwargs)
     sso.sso_secret = sso_secret if sso_secret
 
     parsed = Rack::Utils.parse_query(payload)
@@ -94,7 +107,7 @@ class SingleSignOn
   end
 
   def diagnostics
-    SingleSignOn::ACCESSORS.map { |a| "#{a}: #{public_send(a)}" }.join("\n")
+    DiscourseConnectBase::ACCESSORS.map { |a| "#{a}: #{public_send(a)}" }.join("\n")
   end
 
   def sso_secret
@@ -109,9 +122,17 @@ class SingleSignOn
     @custom_fields ||= {}
   end
 
+  def self.sign(payload, secret)
+    OpenSSL::HMAC.hexdigest("sha256", secret, payload)
+  end
+
   def sign(payload, secret = nil)
     secret = secret || sso_secret
-    OpenSSL::HMAC.hexdigest("sha256", secret, payload)
+    self.class.sign(payload, secret)
+  end
+
+  def to_json
+    self.to_h.to_json
   end
 
   def to_url(base_url = nil)
@@ -125,6 +146,10 @@ class SingleSignOn
   end
 
   def unsigned_payload
+    Rack::Utils.build_query(self.to_h)
+  end
+
+  def to_h
     payload = {}
 
     ACCESSORS.each do |k|
@@ -136,7 +161,6 @@ class SingleSignOn
       payload["custom.#{k}"] = v.to_s
     end
 
-    Rack::Utils.build_query(payload)
+    payload
   end
-
 end

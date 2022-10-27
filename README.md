@@ -1,7 +1,7 @@
 # README
 
 Bratwurst is a simple rails application intended to act as testing support for
-Discourse single sign on.
+DiscourseConnect.
 
 Bratwurst is a brat, since it repeats whatever you say to it, and is the wurst
 possible SSO provider you could use in a production scenario. On the other hand,

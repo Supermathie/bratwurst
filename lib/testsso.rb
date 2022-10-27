@@ -1,6 +1,6 @@
-require 'single_sign_on'
-class TestSSO < SingleSignOn
+require 'discourse_connect_base'
 
+class TestSSO < DiscourseConnectBase
   def sso_url
     ENV['SSO_URL'] or "/sso"
   end
