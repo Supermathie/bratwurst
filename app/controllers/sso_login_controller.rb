@@ -1,4 +1,4 @@
-require 'testsso'
+require 'test_discourse_connect'
 #require 'user'
 
 class SsoLoginController < ActionController::Base
@@ -6,10 +6,10 @@ class SsoLoginController < ActionController::Base
 
   def index
     begin
-      sso = TestSSO.parse(request.query_string)
+      sso = TestDiscourseConnect.parse(request.query_string)
     rescue TypeError
       render inline: "no sso result data present", :status => 400 and return
     end
-    render template: "layouts/sso_login_result.html.erb", locals: { sso: sso}
+    render template: "layouts/sso_login_result", locals: { sso: sso}
   end
 end

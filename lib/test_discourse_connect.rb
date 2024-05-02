@@ -1,6 +1,6 @@
 require 'discourse_connect_base'
 
-class TestSSO < DiscourseConnectBase
+class TestDiscourseConnect < DiscourseConnectBase
   def sso_url
     ENV['SSO_URL'] or "/sso"
   end
